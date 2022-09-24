@@ -13,8 +13,8 @@ import { ptBR } from 'date-fns/locale'
 import { ChartContainer, Container, Content, Header, LoadingContainer, Month, MonthSelect, MonthSelectButton, MonthSelectIcon, Title } from './styles';
 import { ActivityIndicator } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import { useAuth } from '../../context/AuthContext';
 
-const dataKey = '@gofinances:transactions'
 
 interface TransactionData {
   type: 'positive' | 'negative'
@@ -34,6 +34,9 @@ interface CategoryData {
 }
 
 export function Resume() {
+  const { user } = useAuth()
+  const dataKey = `@gofinances:transactions_user:${user.id}`
+
   const theme = useTheme()
 
   const [isLoading, setIsLoading] = useState(false);

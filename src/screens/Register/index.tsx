@@ -12,8 +12,9 @@ import { CategorySelect } from '../CategorySelect';
 import { Container, Header, Title, Form, Filds, TransactionsTypes } from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../context/AuthContext';
 
-const dataKey = '@gofinances:transactions'
+
 
 export interface FormData {
   [name: string]: string;
@@ -29,10 +30,13 @@ const schema = Yup.object().shape({
 })
 
 export function Register() {
+  const { user } = useAuth()
+  const dataKey = `@gofinances:transactions_user:${user.id}`
+
   const navigation = useNavigation();
   const [category, setCategory] = useState({
     key: 'category',
-    name: 'Categoria'
+    name: 'Selecione uma Categoria'
   })
   const [categoryModalOpen, setCategoryModalOpen] = useState(false)
   const [transactionType, setTransactionType] = useState('');
@@ -85,7 +89,7 @@ export function Register() {
       setTransactionType('')
       setCategory({
         key: 'category',
-        name: 'Categoria'
+        name: 'Selecione uma Categoria'
       })
 
       navigation.navigate("Listagem")
@@ -121,13 +125,13 @@ export function Register() {
           />
           <TransactionsTypes>
             <TransactionTypeButton 
-              title='Income' 
+              title='Entrada' 
               type='up' 
               onPress={() => handleTransactionTypeSelect('positive')}
               isActive={transactionType === 'positive'}
             />
             <TransactionTypeButton 
-              title='Outcome' 
+              title='Saída' 
               type='down' 
               onPress={() => handleTransactionTypeSelect('negative')} 
               isActive={transactionType === 'negative'} 

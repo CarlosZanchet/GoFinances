@@ -6,12 +6,17 @@ import {
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
 
-import theme from './src/global/styles/theme';
-import { NavigationContainer } from '@react-navigation/native';
-import { AppRoutes } from './src/Routes/app.routes';
+import themeLight from './src/global/styles/themeLight';
+import themeDark from './src/global/styles/themeDark';
+import { Routes } from './src/Routes';
 import { StatusBar } from 'react-native';
+import { AuthProvider, useAuth } from './src/context/AuthContext';
+import { ThemeLightDarkProvider, useThemeLightDark } from './src/context/ThemeContext';
 
 export default function App() {
+
+  const { userStorageLoading } = useAuth();
+  const { theme } = useThemeLightDark();
 
   
 
@@ -21,16 +26,18 @@ export default function App() {
     Poppins_700Bold,
   });
 
-  if (!fontsLoaded) {
+  if (!fontsLoaded || userStorageLoading) {
     return null;
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <NavigationContainer>
-        <StatusBar barStyle="light-content" />
-        <AppRoutes />
-      </NavigationContainer>
-    </ThemeProvider>
+      <ThemeLightDarkProvider>
+        <ThemeProvider theme={themeLight}>
+            <StatusBar barStyle="light-content" />
+            <AuthProvider>
+                <Routes />
+            </AuthProvider>
+        </ThemeProvider>
+      </ThemeLightDarkProvider>
   );
 }

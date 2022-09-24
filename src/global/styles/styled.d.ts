@@ -1,5 +1,5 @@
 import "styled-components/native";
-import theme from "./theme";
+import theme from "./themeLight";
 
 declare module "styled-components/native" {
   type ThemeType = typeof theme;

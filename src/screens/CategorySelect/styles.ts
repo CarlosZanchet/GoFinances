@@ -28,35 +28,40 @@ export const Title = styled.Text`
   color: ${({ theme }) => theme.colors.shape};
 `
 
-export const Category = styled.TouchableOpacity<CategoryProps>`
+export const CategoryValues = styled.View<CategoryProps>`
   width: 100%;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+`
+
+export const Category = styled.TouchableOpacity<CategoryProps>`
   padding: ${RFValue(15)}px;
   flex-direction: row;
   align-items: center;
-
-  background: ${({ isActive, theme }) => isActive ? theme.colors.secondary_light : theme.colors.background };
+  border-radius: 5px;
+  margin: 4px 0px;
+  background: ${({ isActive, theme }) => isActive ? theme.colors.secondary_light : theme.colors.shape };
 `
 
-export const Icon = styled(Feather)`
+export const Icon = styled(Feather)<CategoryProps>`
   font-size: ${RFValue(20)}px;
   margin-right: 16px;
+  color: ${({ isActive, theme }) => isActive ? theme.colors.secondary : theme.colors.text };;
 `
 
-export const Name = styled.Text`
+export const Name = styled.Text<CategoryProps>`
   font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${RFValue(14)}px;
-`
-
-export const Separator = styled.View`
-  height: 1px;
-  width: 100%;
-  background: ${({ theme }) => theme.colors.text};
+  color: ${({ isActive, theme }) => isActive ? theme.colors.secondary : theme.colors.text };
 `
 
 export const Footer = styled.View`
   width: 100%;
   padding: 24px;
 `
-export const ButtonText = styled.Text`
-
+export const ListCategory = styled.View`
+  padding: 5px 10px;
+  width: 100%;
+  flex: 1;
 `

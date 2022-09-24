@@ -1,6 +1,7 @@
 import styled from 'styled-components/native'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 import { Feather } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper'
 import { DataListProps } from '.'
 import { FlatList, FlatListProps, TouchableOpacity } from 'react-native'
@@ -102,5 +103,31 @@ export const LoadingContainer = styled.View`
   justify-content: center;
   align-items: center;
 `
+
+export const TransactionsBlank = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`
+
+export const TransactionsBlanckText = styled.Text`
+  font-size: 18px;
+  color: ${({ theme }) => theme.colors.text}
+`
+
+export const IconBlank = styled(Feather)`
+  font-size: 100px;
+  color: ${({ theme }) => theme.colors.text}
+`
+export const ThemeButton = styled(Feather)`
+  font-size: 100px;
+  color: ${({ theme }) => theme.colors.text}
+`
+
+export const IconTheme = styled(MaterialCommunityIcons)`
+  color: ${({ theme }) => theme.colors.shape}; 
+  font-size: ${RFValue(20)}px;
+`
+
 
 

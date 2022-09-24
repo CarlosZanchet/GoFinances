@@ -20,7 +20,7 @@ export const Container = styled.TouchableOpacity<ContainerProps>`
 
   border-width: ${({ isActive }) => isActive ? 0 : 1.5}px;
   border-style: solid;
-  border-color: ${({ theme }) => theme.colors.text};
+  border-color: ${({ theme }) => theme.colors.gray_light};
 
   border-radius: 5px;
   padding: 16px 16px;
@@ -40,7 +40,16 @@ margin-right: 12px;
 color: ${({ theme, type }) => type === 'up' ? theme.colors.success : theme.colors.attention}
 `
 
-export const Title = styled.Text`
+export const Title = styled.Text<ContainerProps>`
   font-size: ${RFValue(14)}px;
   font-family: ${({ theme }) => theme.fonts.regular};
+  color: ${({ theme }) => theme.colors.text_dark};
+  
+  ${({ isActive, type }) => isActive && type === 'up' && css`
+    color: ${({ theme }) => theme.colors.success};
+  `}
+
+  ${({ isActive, type }) => isActive && type === 'down' && css`
+    color: ${({ theme }) => theme.colors.attention};
+  `}
 `
